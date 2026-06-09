@@ -1,0 +1,6 @@
+{
+  "name": "PaisaCalc",
+  "description": "India's Free Personal Finance Calculator Suite. Plan smarter and save better with calculators for EMI, SIP, Income Tax, FD/RD, PPF, HRA, GST, and Gratuity.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
