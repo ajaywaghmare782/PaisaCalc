@@ -42,22 +42,44 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentView, selectedPostSlug]);
 
-  // Dynamically load Google AdSense script only after the page is interactive and idle
+  // Dynamically load Google AdSense script on the first user interaction to maximize initial performance
   useEffect(() => {
+    let scriptLoaded = false;
+
     const loadAdSense = () => {
-      if (document.querySelector('script[src*="adsbygoogle.js"]')) return;
+      if (scriptLoaded) return;
+      if (document.querySelector('script[src*="adsbygoogle.js"]')) {
+        scriptLoaded = true;
+        return;
+      }
+      
+      scriptLoaded = true;
       const script = document.createElement('script');
       script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4551792521922995';
       script.async = true;
       script.crossOrigin = 'anonymous';
       document.body.appendChild(script);
+
+      // Clean up event listeners
+      cleanupListeners();
     };
 
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(() => setTimeout(loadAdSense, 1000));
-    } else {
-      setTimeout(loadAdSense, 2000);
-    }
+    const interactionEvents = ['mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart'];
+
+    const cleanupListeners = () => {
+      interactionEvents.forEach(event => {
+        window.removeEventListener(event, loadAdSense);
+      });
+    };
+
+    // Listen for any of these user interaction events
+    interactionEvents.forEach(event => {
+      window.addEventListener(event, loadAdSense, { passive: true });
+    });
+
+    return () => {
+      cleanupListeners();
+    };
   }, []);
 
   const handleNavigateView = (view: ActiveView) => {
