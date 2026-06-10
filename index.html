@@ -19,7 +19,54 @@
     <meta name="google-site-verification" content="NLRG-UDpYub1ARGe7p54TV0BxZH83iaD899nONhSABE" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!-- Static Shell for Instant FCP & LCP Rendering -->
+      <header class="sticky top-0 z-50 bg-white border-b border-gray-150 backdrop-blur-md bg-white/95">
+        <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between font-sans relative">
+          <div class="text-xl font-bold tracking-tight inline-flex items-center gap-1">
+            <span class="text-accent font-extrabold text-2xl">₹</span>
+            <span class="text-primary font-serif-heading font-semibold">Paisa</span>
+            <span class="text-text-muted font-normal">Calc</span>
+          </div>
+          <div class="hidden md:flex items-center gap-6">
+            <span class="text-sm font-semibold text-accent">Home</span>
+            <span class="text-sm font-semibold text-primary">Calculators</span>
+            <span class="text-sm font-semibold text-primary">Blog</span>
+            <span class="text-sm font-semibold text-primary">About</span>
+          </div>
+          <div class="hidden md:block">
+            <div class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl">All Calculators</div>
+          </div>
+        </nav>
+      </header>
+      <main class="flex-grow">
+        <div class="space-y-12 animate-pageEnter">
+          <section class="bg-primary text-white py-16 md:py-24 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.04] pointer-events-none select-none flex items-center justify-center text-[20rem] font-bold font-mono">
+              ₹
+            </div>
+            <div class="max-w-6xl mx-auto px-4 relative z-10 text-center space-y-6">
+              <span class="inline-block bg-accent text-primary px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase font-sans">
+                100% Free • No Signups • Safe & Secure
+              </span>
+              <h1 class="text-4xl md:text-6xl font-semibold tracking-tight font-serif-heading max-w-4xl mx-auto leading-tight md:leading-none">
+                Calculate Your Financial Future — Plan Smarter, Save Better
+              </h1>
+              <p class="text-gray-200 text-base md:text-xl max-w-2xl mx-auto font-sans leading-relaxed">
+                From housing loan EMIs to SIP returns to side-by-side Income Tax brackets — all premium Indian financial calculators in one unified suite.
+              </p>
+              <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <div class="px-6 py-3.5 bg-accent text-primary rounded-xl font-bold text-sm shadow-lg shadow-accent/20">
+                  Explore Calculators
+                </div>
+                <div class="px-6 py-3.5 bg-white/10 text-white rounded-xl font-bold text-sm border border-white/10">
+                  Read Financial Blog
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
