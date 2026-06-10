@@ -6,7 +6,6 @@
 import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import { ActiveView } from './types';
 import { BLOG_POSTS } from './data/blogData';
-import { motion } from 'motion/react';
 
 // Shared Layout Components
 import Navbar from './components/Navbar';
@@ -42,6 +41,24 @@ export default function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentView, selectedPostSlug]);
+
+  // Dynamically load Google AdSense script only after the page is interactive and idle
+  useEffect(() => {
+    const loadAdSense = () => {
+      if (document.querySelector('script[src*="adsbygoogle.js"]')) return;
+      const script = document.createElement('script');
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4551792521922995';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      document.body.appendChild(script);
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => setTimeout(loadAdSense, 1000));
+    } else {
+      setTimeout(loadAdSense, 2000);
+    }
+  }, []);
 
   const handleNavigateView = (view: ActiveView) => {
     setCurrentView(view);
@@ -122,16 +139,12 @@ export default function App() {
             <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
           </div>
         }>
-          <motion.div
+          <div
             key={currentView + (currentView === ActiveView.BLOG_POST ? selectedPostSlug : '')}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="w-full"
+            className="w-full animate-pageEnter"
           >
             {renderContentView()}
-          </motion.div>
+          </div>
         </Suspense>
       </main>
 

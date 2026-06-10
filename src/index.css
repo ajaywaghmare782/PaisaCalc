@@ -12,6 +12,29 @@
   --color-text-muted: #5A6270;
   --color-border: #E5E7EB;
   --color-success: #10B981;
+
+  --animate-fadeIn: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pageEnter: pageEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes pageEnter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 body {
