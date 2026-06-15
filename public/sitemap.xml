@@ -1,72 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/emi-calculator</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/emi-calculator</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/sip-calculator</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/sip-calculator</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/income-tax-calculator</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/income-tax-calculator</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/fd-rd-calculator</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/fd-rd-calculator</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/ppf-calculator</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/ppf-calculator</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/hra-calculator</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/hra-calculator</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/gst-calculator</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/gst-calculator</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/gratuity-calculator</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/gratuity-calculator</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://magnificent-longma-198267.netlify.app/blog</loc>
-    <lastmod>2026-06-09</lastmod>
+    <loc>https://paisacalc.in/blog</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://paisacalc.in/blog/what-is-emi</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://paisacalc.in/blog/sip-vs-lumpsum</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://paisacalc.in/blog/old-vs-new-tax-regime</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://paisacalc.in/blog/what-is-ppf</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://paisacalc.in/blog/how-hra-exemption-works</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://paisacalc.in/blog/what-is-gst-india</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://paisacalc.in/blog/gratuity-explained</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

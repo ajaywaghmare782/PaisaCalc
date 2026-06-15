@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://magnificent-longma-198267.netlify.app/sitemap.xml
+Sitemap: https://paisacalc.in/sitemap.xml
