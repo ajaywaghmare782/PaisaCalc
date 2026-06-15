@@ -1,3 +1,6 @@
 https://magnificent-longma-198267.netlify.app/* https://paisacalcforindia.netlify.app/:splat 301!
 https://paisacalc.in/* https://paisacalcforindia.netlify.app/:splat 301!
+/sitemap.xml    /sitemap.xml    200
+/robots.txt     /robots.txt     200
+/ads.txt        /ads.txt        200
 /* /index.html 200
