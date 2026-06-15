@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://paisacalcforindia.netlify.app/sitemap.xml
+Sitemap: https://paisa-calc.vercel.app/sitemap.xml
