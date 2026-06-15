@@ -132,7 +132,7 @@ export default function About() {
           Calculations are computed on approximate benchmark guidelines which may experience change after national fiscal budgets or RBI interest rate declarations. For specific personal tax planning or investment outlays, we highly recommend scheduling direct, paid counseling sessions with a qualified Chartered Accountant (CA) or certified financial planner.
         </p>
         <p>
-          For official concerns, you can contact our technical webmasters directly at: <a href="mailto:contact@paisacalc.in" className="underline font-bold">contact@paisacalc.in</a>.
+          For official concerns, you can contact our technical webmasters directly at: <a href="mailto:contact@paisacalcforindia.netlify.app" className="underline font-bold">contact@paisacalcforindia.netlify.app</a>.
         </p>
       </section>
     </div>

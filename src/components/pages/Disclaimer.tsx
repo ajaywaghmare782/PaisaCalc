@@ -49,7 +49,7 @@ export default function Disclaimer() {
           </div>
 
           <div className="pt-4 border-t border-gray-50 text-xs">
-            For corporate concerns or reports, reach us via: <a href="mailto:contact@paisacalc.in" className="underline font-bold text-primary">contact@paisacalc.in</a>.
+            For corporate concerns or reports, reach us via: <a href="mailto:contact@paisacalcforindia.netlify.app" className="underline font-bold text-primary">contact@paisacalcforindia.netlify.app</a>.
           </div>
         </div>
       </div>

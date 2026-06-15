@@ -22,7 +22,7 @@ export default function PrivacyPolicy() {
             <div>
               <h2 className="text-lg font-bold text-primary font-serif-heading mb-1.5">No Direct Data Harvesting</h2>
               <p>
-                At PaisaCalc, accessible from paisacalc.in, one of our main priorities is the absolute privacy of our visitors. We do NOT harvest, compile, scan, or store your mathematical calculator parameters, payroll digits, rent payouts, tax brackets, or investment projections. Every calculation is executed in real-time within your local web browser context.
+                At PaisaCalc, accessible from paisacalcforindia.netlify.app, one of our main priorities is the absolute privacy of our visitors. We do NOT harvest, compile, scan, or store your mathematical calculator parameters, payroll digits, rent payouts, tax brackets, or investment projections. Every calculation is executed in real-time within your local web browser context.
               </p>
             </div>
           </div>
@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
             <div>
               <h2 className="text-lg font-bold text-primary font-serif-heading mb-1.5">Third-Party Cookies & AdSense Logging</h2>
               <p className="mb-2">
-                PaisaCalc partners with third-party advertising vendors like Google AdSense to serve monetised advertisement units. Google, as a third-party vendor, uses cookies (including DoubleClick DART cookies) to serve ads to our site visitors based on their visit to paisacalc.in and other sites on the internet.
+                PaisaCalc partners with third-party advertising vendors like Google AdSense to serve monetised advertisement units. Google, as a third-party vendor, uses cookies (including DoubleClick DART cookies) to serve ads to our site visitors based on their visit to paisacalcforindia.netlify.app and other sites on the internet.
               </p>
               <p>
                 Visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold underline">https://policies.google.com/technologies/ads</a>.
@@ -65,7 +65,7 @@ export default function PrivacyPolicy() {
               By utilizing our financial calculators, blog insights, and webpage pages, you hereby consent to our corporate Privacy Policy and agree to its standard Terms and Conditions.
             </p>
             <p className="mt-2">
-              If you hold queries or request clarifications, feel free to contact us via our secure technical webmaster inbox: <a href="mailto:contact@paisacalc.in" className="underline font-bold text-primary">contact@paisacalc.in</a>.
+              If you hold queries or request clarifications, feel free to contact us via our secure technical webmaster inbox: <a href="mailto:contact@paisacalcforindia.netlify.app" className="underline font-bold text-primary">contact@paisacalcforindia.netlify.app</a>.
             </p>
           </div>
         </div>
