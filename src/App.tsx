@@ -235,7 +235,7 @@ export default function App() {
   useEffect(() => {
     const path = viewToPath(currentView, selectedPostSlug);
     const { title, description } = getPageMetadata(currentView, selectedPostSlug);
-    const canonicalUrl = `https://paisa-calc.vercel.app${path}`;
+    const canonicalUrl = `https://mypaisacalc.vercel.app${path}`;
 
     // Update document title
     document.title = title;
