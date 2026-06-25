@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { formatCurrency, calculateFd, calculateRd } from '../../utils/financeUtils';
 import AdSenseHolder from '../AdSenseHolder';
-import { Landmark, ArrowRight, Table, Percent, HelpCircle } from 'lucide-react';
 
 interface FdRdCalculatorProps {
   onNavigateToBlog: (slug: string) => void;
@@ -42,381 +41,437 @@ export default function FdRdCalculator({ onNavigateToBlog }: FdRdCalculatorProps
   }, [rdMonthlyDeposit, rdRate, rdTenureMonths]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-3xl mx-auto px-4 py-8 space-y-8 font-sans">
       {/* Page Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-semibold text-primary tracking-tight mb-2">
-          FD & RD Calculator India
+      <div className="border-b border-border pb-6">
+        <h1 className="text-3xl font-semibold text-primary tracking-tight mb-2">
+          FD & RD Calculator
         </h1>
-        <p className="text-text-muted max-w-2xl">
-          Instantly evaluate maturity values and wealth accrued through Fixed Deposits (FD) or Recurring Deposits (RD) with customized options.
+        <p className="text-text-muted text-base">
+          Calculate maturity values and interest yields for Fixed Deposits (FD) and Recurring Deposits (RD).
         </p>
       </div>
 
       {/* Tab Switcher */}
-      <div className="flex bg-gray-100 p-1 rounded-xl max-w-xs mb-8">
+      <div className="flex bg-slate-100 p-0.5 rounded-lg max-w-xs font-semibold">
         <button
           onClick={() => setActiveTab('fd')}
-          className={`flex-1 text-center py-2 text-sm font-semibold rounded-lg transition ${activeTab === 'fd' ? 'bg-white text-primary shadow-sm' : 'text-text-muted'}`}
+          className={`flex-1 text-center py-2 text-sm rounded-md transition cursor-pointer ${activeTab === 'fd' ? 'bg-white text-primary shadow-sm' : 'text-text-muted'}`}
         >
           Fixed Deposit (FD)
         </button>
         <button
           onClick={() => setActiveTab('rd')}
-          className={`flex-1 text-center py-2 text-sm font-semibold rounded-lg transition ${activeTab === 'rd' ? 'bg-white text-primary shadow-sm' : 'text-text-muted'}`}
+          className={`flex-1 text-center py-2 text-sm rounded-md transition cursor-pointer ${activeTab === 'rd' ? 'bg-white text-primary shadow-sm' : 'text-text-muted'}`}
         >
           Recurring Deposit (RD)
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left column: Calculator & Results */}
-        <div className="lg:col-span-8 space-y-6">
-          {activeTab === 'fd' ? (
-            /* FD CALCULATOR */
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 space-y-6">
-              <h2 className="text-xl font-medium text-text flex items-center gap-2">
-                <Landmark className="w-5 h-5 text-accent" /> Configure Fixed Deposit
-              </h2>
+      {/* 1. Inputs Section */}
+      <div className="bg-white rounded-xl border border-border p-6 md:p-8 space-y-6">
+        {activeTab === 'fd' ? (
+          /* FD CALCULATOR */
+          <div className="space-y-6">
+            <h2 className="text-lg font-semibold text-primary border-b border-border pb-3">
+              Configure Fixed Deposit
+            </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Principal */}
-                <div className="md:col-span-2">
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-semibold text-text">Deposit Principal Amount (₹)</label>
-                    <input
-                      type="number"
-                      value={fdPrincipal}
-                      onChange={(e) => setFdPrincipal(Math.max(1000, Number(e.target.value)))}
-                      className="w-28 text-right font-medium text-primary border-b border-gray-300 focus:border-accent outline-none px-1"
-                    />
-                  </div>
-                  <input
-                    type="range"
-                    min="5000"
-                    max="1000000"
-                    step="5000"
-                    value={fdPrincipal}
-                    onChange={(e) => setFdPrincipal(Number(e.target.value))}
-                    className="w-full accent-primary h-2 bg-gray-100 rounded-lg"
-                  />
-                  <div className="flex justify-between text-[11px] text-text-muted mt-1 font-sans">
-                    <span>₹5,000</span>
-                    <span>₹5 Lakhs</span>
-                    <span>₹10 Lakhs</span>
-                  </div>
-                </div>
+            {/* Principal */}
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-sm font-medium text-primary">Deposit Principal Amount (₹)</label>
+                <input
+                  type="number"
+                  value={fdPrincipal}
+                  onChange={(e) => setFdPrincipal(Math.max(1000, Number(e.target.value)))}
+                  className="w-28 text-right font-medium text-primary border-b border-border focus:border-accent outline-none px-1 py-0.5"
+                />
+              </div>
+              <input
+                type="range"
+                min="5000"
+                max="1000000"
+                step="5000"
+                value={fdPrincipal}
+                onChange={(e) => setFdPrincipal(Number(e.target.value))}
+                className="w-full accent-primary h-2 bg-slate-100 rounded-lg cursor-pointer"
+              />
+              <div className="flex justify-between text-[11px] text-text-muted mt-1 font-sans">
+                <span>₹5,000</span>
+                <span>₹5 Lakhs</span>
+                <span>₹10 Lakhs</span>
+              </div>
+            </div>
 
-                {/* Rate */}
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-xs font-semibold text-text-muted uppercase">Annual Interest Rate (%)</label>
-                    <input
-                      type="number"
-                      step="0.05"
-                      value={fdRate}
-                      onChange={(e) => setFdRate(Math.min(15, Math.max(1, Number(e.target.value))))}
-                      className="w-16 text-right font-medium text-primary border-b border-gray-300 focus:border-accent outline-none px-1 text-sm	"
-                    />
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Rate */}
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label className="text-xs font-semibold text-primary uppercase">Annual Interest Rate (%)</label>
                   <input
-                    type="range"
-                    min="1"
-                    max="15"
-                    step="0.1"
+                    type="number"
+                    step="0.05"
                     value={fdRate}
-                    onChange={(e) => setFdRate(Number(e.target.value))}
-                    className="w-full accent-primary h-1.5 bg-gray-100 rounded-lg"
+                    onChange={(e) => setFdRate(Math.min(15, Math.max(1, Number(e.target.value))))}
+                    className="w-16 text-right font-medium text-primary border-b border-border focus:border-accent outline-none px-1 text-sm py-0.5"
                   />
                 </div>
-
-                {/* Compounding frequency */}
-                <div>
-                  <label className="block text-xs font-semibold text-text-muted uppercase mb-2">Compounding Frequency</label>
-                  <select
-                    value={compoundingFrequency}
-                    onChange={(e) => setCompoundingFrequency(Number(e.target.value) as 12 | 4 | 2 | 1)}
-                    className="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-medium text-primary outline-none text-sm"
-                  >
-                    <option value={4}>Quarterly (Standard)</option>
-                    <option value={12}>Monthly</option>
-                    <option value={2}>Half-yearly</option>
-                    <option value={1}>Yearly</option>
-                  </select>
-                </div>
-
-                {/* Tenure */}
-                <div>
-                  <label className="block text-xs font-semibold text-text-muted uppercase mb-2">Deposit Tenure</label>
-                  <div className="flex gap-4">
-                    <div className="flex-1">
-                      <span className="text-[10px] text-text-muted block">Years</span>
-                      <input
-                        type="number"
-                        min="0"
-                        max="25"
-                        value={fdYears}
-                        onChange={(e) => setFdYears(Math.max(0, Number(e.target.value)))}
-                        className="w-full bg-gray-50 border border-gray-200 p-2 rounded-lg text-sm font-medium text-primary outline-none"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <span className="text-[10px] text-text-muted block">Months</span>
-                      <input
-                        type="number"
-                        min="0"
-                        max="11"
-                        value={fdMonths}
-                        onChange={(e) => setFdMonths(Math.min(11, Math.max(0, Number(e.target.value))))}
-                        className="w-full bg-gray-50 border border-gray-200 p-2 rounded-lg text-sm font-medium text-primary outline-none"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Payout Option */}
-                <div>
-                  <label className="block text-xs font-semibold text-text-muted uppercase mb-2">Interests Payout Mode</label>
-                  <select
-                    value={payoutOption}
-                    onChange={(e) => setPayoutOption(e.target.value as 'maturity' | 'monthly_interest')}
-                    className="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-medium text-primary outline-none text-sm"
-                  >
-                    <option value="maturity">Accumulated Interest (At Maturity)</option>
-                    <option value="monthly_interest">Monthly Periodic Payout</option>
-                  </select>
-                </div>
-
-                {/* Senior Citizen Checkbox */}
-                <div className="md:col-span-2 flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-xl p-4">
-                  <input
-                    type="checkbox"
-                    id="seniorCheckbox"
-                    checked={isSenior}
-                    onChange={(e) => setIsSenior(e.target.checked)}
-                    className="w-4 h-4 text-primary focus:ring-accent border-gray-350 rounded"
-                  />
-                  <label htmlFor="seniorCheckbox" className="text-sm font-semibold text-primary cursor-pointer select-none">
-                    I am a Senior Citizen (Adds +0.50% automatic bonus interest rate)
-                  </label>
-                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="15"
+                  step="0.1"
+                  value={fdRate}
+                  onChange={(e) => setFdRate(Number(e.target.value))}
+                  className="w-full accent-primary h-1.5 bg-slate-100 rounded-lg cursor-pointer"
+                />
               </div>
-            </div>
-          ) : (
-            /* RD CALCULATOR */
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 space-y-6">
-              <h2 className="text-xl font-medium text-text flex items-center gap-2">
-                <Landmark className="w-5 h-5 text-accent" /> Configure Recurring Deposit
-              </h2>
 
-              <div className="space-y-6">
-                {/* Monthly deposit */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-semibold text-text">Monthly Deposit Amount (₹)</label>
+              {/* Compounding frequency */}
+              <div>
+                <label className="block text-xs font-semibold text-primary uppercase mb-2">Compounding Frequency</label>
+                <select
+                  value={compoundingFrequency}
+                  onChange={(e) => setCompoundingFrequency(Number(e.target.value) as 12 | 4 | 2 | 1)}
+                  className="w-full bg-slate-50 border border-border p-2 rounded-lg font-medium text-primary outline-none text-sm cursor-pointer"
+                >
+                  <option value={4}>Quarterly (Standard)</option>
+                  <option value={12}>Monthly</option>
+                  <option value={2}>Half-yearly</option>
+                  <option value={1}>Yearly</option>
+                </select>
+              </div>
+
+              {/* Tenure */}
+              <div>
+                <label className="block text-xs font-semibold text-primary uppercase mb-2">Deposit Tenure</label>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <span className="text-[10px] text-text-muted block mb-1">Years</span>
                     <input
                       type="number"
-                      value={rdMonthlyDeposit}
-                      onChange={(e) => setRdMonthlyDeposit(Math.max(500, Number(e.target.value)))}
-                      className="w-24 text-right font-medium text-primary border-b border-gray-300 focus:border-accent outline-none px-1"
+                      min="0"
+                      max="25"
+                      value={fdYears}
+                      onChange={(e) => setFdYears(Math.max(0, Number(e.target.value)))}
+                      className="w-full bg-slate-50 border border-border p-2 rounded-lg text-sm font-medium text-primary outline-none"
                     />
                   </div>
+                  <div className="flex-1">
+                    <span className="text-[10px] text-text-muted block mb-1">Months</span>
+                    <input
+                      type="number"
+                      min="0"
+                      max="11"
+                      value={fdMonths}
+                      onChange={(e) => setFdMonths(Math.min(11, Math.max(0, Number(e.target.value))))}
+                      className="w-full bg-slate-50 border border-border p-2 rounded-lg text-sm font-medium text-primary outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Payout Option */}
+              <div>
+                <label className="block text-xs font-semibold text-primary uppercase mb-2">Interests Payout Mode</label>
+                <select
+                  value={payoutOption}
+                  onChange={(e) => setPayoutOption(e.target.value as 'maturity' | 'monthly_interest')}
+                  className="w-full bg-slate-50 border border-border p-2 rounded-lg font-medium text-primary outline-none text-sm cursor-pointer"
+                >
+                  <option value="maturity">Accumulated Interest (At Maturity)</option>
+                  <option value="monthly_interest">Monthly Periodic Payout</option>
+                </select>
+              </div>
+
+              {/* Senior Citizen Checkbox */}
+              <div className="md:col-span-2 flex items-center gap-3 bg-slate-50 border border-border rounded-xl p-4">
+                <input
+                  type="checkbox"
+                  id="seniorCheckbox"
+                  checked={isSenior}
+                  onChange={(e) => setIsSenior(e.target.checked)}
+                  className="w-4 h-4 text-primary focus:ring-accent border-border rounded cursor-pointer"
+                />
+                <label htmlFor="seniorCheckbox" className="text-sm font-medium text-primary cursor-pointer select-none">
+                  Senior Citizen (Adds +0.50% automatic bonus interest rate)
+                </label>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* RD CALCULATOR */
+          <div className="space-y-6">
+            <h2 className="text-lg font-semibold text-primary border-b border-border pb-3">
+              Configure Recurring Deposit
+            </h2>
+
+            {/* Monthly deposit */}
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-sm font-medium text-primary">Monthly Deposit Amount (₹)</label>
+                <input
+                  type="number"
+                  value={rdMonthlyDeposit}
+                  onChange={(e) => setRdMonthlyDeposit(Math.max(500, Number(e.target.value)))}
+                  className="w-24 text-right font-medium text-primary border-b border-border focus:border-accent outline-none px-1 py-0.5"
+                />
+              </div>
+              <input
+                type="range"
+                min="500"
+                max="50000"
+                step="500"
+                value={rdMonthlyDeposit}
+                onChange={(e) => setRdMonthlyDeposit(Number(e.target.value))}
+                className="w-full accent-primary h-2 bg-slate-100 rounded-lg cursor-pointer"
+              />
+              <div className="flex justify-between text-[11px] text-text-muted mt-1 font-sans">
+                <span>₹500</span>
+                <span>₹25,000</span>
+                <span>₹50,000</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Rate */}
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-xs font-semibold text-primary uppercase">Annual Interest Rate (%)</label>
                   <input
-                    type="range"
-                    min="500"
-                    max="50000"
-                    step="500"
-                    value={rdMonthlyDeposit}
-                    onChange={(e) => setRdMonthlyDeposit(Number(e.target.value))}
-                    className="w-full accent-primary h-2 bg-gray-100 rounded-lg"
+                    type="number"
+                    step="0.1"
+                    value={rdRate}
+                    onChange={(e) => setRdRate(Math.min(15, Math.max(1, Number(e.target.value))))}
+                    className="w-16 text-right font-medium text-primary border-b border-border focus:border-accent outline-none px-1 text-sm py-0.5"
                   />
-                  <div className="flex justify-between text-[11px] text-text-muted mt-1 font-sans">
-                    <span>₹500</span>
-                    <span>₹25,000</span>
-                    <span>₹50,000</span>
-                  </div>
                 </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="15"
+                  step="0.1"
+                  value={rdRate}
+                  onChange={(e) => setRdRate(Number(e.target.value))}
+                  className="w-full accent-primary h-1.5 bg-slate-100 rounded-lg cursor-pointer"
+                />
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Rate */}
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="text-xs font-semibold text-text-muted uppercase">Annual Int. Rate (%)</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={rdRate}
-                        onChange={(e) => setRdRate(Math.min(15, Math.max(1, Number(e.target.value))))}
-                        className="w-16 text-right font-medium text-primary border-b border-gray-200 focus:border-accent outline-none px-1 text-sm"
-                      />
-                    </div>
-                    <input
-                      type="range"
-                      min="1"
-                      max="15"
-                      step="0.1"
-                      value={rdRate}
-                      onChange={(e) => setRdRate(Number(e.target.value))}
-                      className="w-full accent-primary h-1.5 bg-gray-100 rounded-lg"
-                    />
-                  </div>
-
-                  {/* Period Months */}
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="text-xs font-semibold text-text-muted uppercase">Tenure Duration (Months)</label>
-                      <input
-                        type="number"
-                        value={rdTenureMonths}
-                        onChange={(e) => setRdTenureMonths(Math.min(120, Math.max(3, Number(e.target.value))))}
-                        className="w-16 text-right font-medium text-primary border-b border-gray-200 focus:border-accent outline-none px-1 text-sm"
-                      />
-                    </div>
-                    <input
-                      type="range"
-                      min="3"
-                      max="120"
-                      step="1"
-                      value={rdTenureMonths}
-                      onChange={(e) => setRdTenureMonths(Number(e.target.value))}
-                      className="w-full accent-primary h-1.5 bg-gray-100 rounded-lg"
-                    />
-                    <div className="flex justify-between text-[9px] text-text-muted mt-1 font-sans">
-                      <span>3 M</span>
-                      <span>60 M</span>
-                      <span>120 M (10 Yrs)</span>
-                    </div>
-                  </div>
+              {/* Period Months */}
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-xs font-semibold text-primary uppercase">Tenure Duration (Months)</label>
+                  <input
+                    type="number"
+                    value={rdTenureMonths}
+                    onChange={(e) => setRdTenureMonths(Math.min(120, Math.max(3, Number(e.target.value))))}
+                    className="w-16 text-right font-medium text-primary border-b border-border focus:border-accent outline-none px-1 text-sm py-0.5"
+                  />
+                </div>
+                <input
+                  type="range"
+                  min="3"
+                  max="120"
+                  step="1"
+                  value={rdTenureMonths}
+                  onChange={(e) => setRdTenureMonths(Number(e.target.value))}
+                  className="w-full accent-primary h-1.5 bg-slate-100 rounded-lg cursor-pointer"
+                />
+                <div className="flex justify-between text-[9px] text-text-muted mt-1 font-sans">
+                  <span>3 M</span>
+                  <span>60 M</span>
+                  <span>120 M (10 Yrs)</span>
                 </div>
               </div>
             </div>
-          )}
-
-          <AdSenseHolder label="Above Results Advertisement Slot" />
-
-          {/* Results section */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
-            <h3 className="text-lg font-medium text-text mb-6">Aggregate Breakdown</h3>
-
-            {activeTab === 'fd' ? (
-              /* FD RESULTS */
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
-                <div className="bg-success/5 p-4 rounded-xl border border-success/15 md:col-span-3 text-center">
-                  <span className="text-xs text-success font-semibold uppercase tracking-wider block mb-1">Maturity Amount</span>
-                  <span className="text-3xl font-extrabold text-primary block">
-                    {formatCurrency(fdResults.maturityAmount)}
-                  </span>
-                </div>
-                <div className="p-4 bg-gray-50/50 rounded-xl">
-                  <span className="text-xs text-text-muted block">Deposited Principal</span>
-                  <span className="text-lg font-semibold text-text">{formatCurrency(fdPrincipal)}</span>
-                </div>
-                <div className="p-4 bg-gray-50/50 rounded-xl">
-                  <span className="text-xs text-text-muted block">Wealth Interest Gained</span>
-                  <span className="text-lg font-semibold text-accent">{formatCurrency(fdResults.interestEarned)}</span>
-                </div>
-                <div className="p-4 bg-gray-50/50 rounded-xl">
-                  <span className="text-xs text-text-muted block">Effective Annual Yield</span>
-                  <span className="text-lg font-semibold text-text">{fdResults.effectiveYield.toFixed(2)}%</span>
-                </div>
-              </div>
-            ) : (
-              /* RD RESULTS */
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
-                <div className="bg-success/5 p-4 rounded-xl border border-success/15 md:col-span-3 text-center">
-                  <span className="text-xs text-success font-semibold uppercase tracking-wider block mb-1">Estimated Maturity Value</span>
-                  <span className="text-3xl font-extrabold text-primary block">
-                    {formatCurrency(rdResults.maturityAmount)}
-                  </span>
-                </div>
-                <div className="p-4 bg-gray-50/50 rounded-xl">
-                  <span className="text-xs text-text-muted block">Total Monthly Deposits</span>
-                  <span className="text-lg font-semibold text-text">{formatCurrency(rdResults.totalDeposited)}</span>
-                </div>
-                <div className="p-4 bg-gray-50/50 rounded-xl">
-                  <span className="text-xs text-text-muted block">Interest Sum Accrued</span>
-                  <span className="text-lg font-semibold text-accent">{formatCurrency(rdResults.interestEarned)}</span>
-                </div>
-                <div className="p-4 bg-gray-50/50 rounded-xl">
-                  <span className="text-xs text-text-muted block">Total Installments</span>
-                  <span className="text-lg font-semibold text-text">{rdTenureMonths} Payments</span>
-                </div>
-              </div>
-            )}
           </div>
+        )}
+      </div>
+
+      <AdSenseHolder label="Above Results Advertisement" />
+
+      {/* 2. Results Section */}
+      <div className="bg-white rounded-xl border border-border p-6 md:p-8 space-y-6">
+        <h2 className="text-lg font-semibold text-primary border-b border-border pb-3">
+          Maturity Breakdown
+        </h2>
+
+        {activeTab === 'fd' ? (
+          /* FD RESULTS */
+          <div className="space-y-6 font-sans">
+            <div className="bg-slate-50 rounded-lg p-5 border border-border text-center">
+              <span className="text-xs text-text-muted font-medium uppercase tracking-wide block mb-1">
+                Estimated Maturity Amount
+              </span>
+              <span className="text-3xl font-bold text-teal-700 block">
+                {formatCurrency(fdResults.maturityAmount)}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2 text-center sm:text-left">
+              <div className="border-b sm:border-b-0 sm:border-r border-border pb-4 sm:pb-0 sm:pr-4">
+                <span className="text-xs text-text-muted block mb-0.5">Deposited Principal</span>
+                <span className="text-lg font-semibold text-primary">
+                  {formatCurrency(fdPrincipal)}
+                </span>
+              </div>
+              <div className="border-b sm:border-b-0 sm:border-r border-border pb-4 sm:pb-0 sm:pr-4">
+                <span className="text-xs text-text-muted block mb-0.5">Wealth Interest Gained</span>
+                <span className="text-lg font-semibold text-primary">
+                  {formatCurrency(fdResults.interestEarned)}
+                </span>
+              </div>
+              <div>
+                <span className="text-xs text-text-muted block mb-0.5">Effective Annual Yield</span>
+                <span className="text-lg font-semibold text-primary">
+                  {fdResults.effectiveYield.toFixed(2)}%
+                </span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* RD RESULTS */
+          <div className="space-y-6 font-sans">
+            <div className="bg-slate-50 rounded-lg p-5 border border-border text-center">
+              <span className="text-xs text-text-muted font-medium uppercase tracking-wide block mb-1">
+                Estimated Maturity Value
+              </span>
+              <span className="text-3xl font-bold text-teal-700 block">
+                {formatCurrency(rdResults.maturityAmount)}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2 text-center sm:text-left">
+              <div className="border-b sm:border-b-0 sm:border-r border-border pb-4 sm:pb-0 sm:pr-4">
+                <span className="text-xs text-text-muted block mb-0.5">Total Monthly Deposits</span>
+                <span className="text-lg font-semibold text-primary">
+                  {formatCurrency(rdResults.totalDeposited)}
+                </span>
+              </div>
+              <div className="border-b sm:border-b-0 sm:border-r border-border pb-4 sm:pb-0 sm:pr-4">
+                <span className="text-xs text-text-muted block mb-0.5">Interest Sum Accrued</span>
+                <span className="text-lg font-semibold text-primary">
+                  {formatCurrency(rdResults.interestEarned)}
+                </span>
+              </div>
+              <div>
+                <span className="text-xs text-text-muted block mb-0.5">Total Installments</span>
+                <span className="text-lg font-semibold text-primary">
+                  {rdTenureMonths} Payments
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 3. Explanation Section */}
+      <div className="bg-white rounded-xl border border-border p-6 md:p-8 space-y-6 text-sm font-sans leading-relaxed">
+        <h2 className="text-lg font-semibold text-primary border-b border-border pb-3">
+          FD vs RD: Which is better?
+        </h2>
+        <div className="space-y-4 text-text-muted text-xs sm:text-sm">
+          <p>
+            While both vehicles offer government-regulated risk-free gains, they suit distinct cash flows:
+          </p>
+          <ul className="space-y-3">
+            <li>
+              <strong>• Fixed Deposits (FD):</strong> Best when you hold idle surplus capital (windfalls, bonuses) that can lock in to earn compounding returns instantly.
+            </li>
+            <li>
+              <strong>• Recurring Deposits (RD):</strong> Ideal to commit a portion of your regular monthly salary. Each installment gains interest as you continue to deposit.
+            </li>
+          </ul>
+
+          <h3 className="text-base font-semibold text-primary pt-4">Indicative Bank FD Rates (2025-26)</h3>
+          <div className="overflow-x-auto border border-border rounded-lg mt-2">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-slate-50 border-b border-border">
+                  <th className="py-2 px-3 font-semibold text-primary">Bank</th>
+                  <th className="py-2 px-3 font-semibold text-primary text-right">1 Yr</th>
+                  <th className="py-2 px-3 font-semibold text-primary text-right">3 Yrs</th>
+                  <th className="py-2 px-3 font-semibold text-primary text-right">5 Yrs</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/60">
+                <tr className="hover:bg-slate-50/50">
+                  <td className="py-2 px-3 font-medium text-primary">SBI</td>
+                  <td className="py-2 px-3 text-right">6.80%</td>
+                  <td className="py-2 px-3 text-right">6.75%</td>
+                  <td className="py-2 px-3 text-right">6.50%</td>
+                </tr>
+                <tr className="hover:bg-slate-50/50">
+                  <td className="py-2 px-3 font-medium text-primary">HDFC Bank</td>
+                  <td className="py-2 px-3 text-right">7.10%</td>
+                  <td className="py-2 px-3 text-right">7.00%</td>
+                  <td className="py-2 px-3 text-right">7.00%</td>
+                </tr>
+                <tr className="hover:bg-slate-50/50">
+                  <td className="py-2 px-3 font-medium text-primary">ICICI Bank</td>
+                  <td className="py-2 px-3 text-right">7.10%</td>
+                  <td className="py-2 px-3 text-right">7.00%</td>
+                  <td className="py-2 px-3 text-right">6.90%</td>
+                </tr>
+                <tr className="hover:bg-slate-50/50">
+                  <td className="py-2 px-3 font-medium text-primary">Axis Bank</td>
+                  <td className="py-2 px-3 text-right">7.20%</td>
+                  <td className="py-2 px-3 text-right">7.10%</td>
+                  <td className="py-2 px-3 text-right">7.00%</td>
+                </tr>
+                <tr className="hover:bg-slate-50/50">
+                  <td className="py-2 px-3 font-medium text-primary">Kotak Bank</td>
+                  <td className="py-2 px-3 text-right">7.15%</td>
+                  <td className="py-2 px-3 text-right">7.00%</td>
+                  <td className="py-2 px-3 text-right">6.80%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-[10px] text-text-muted mt-2 italic leading-relaxed">
+            * Note: These are indicative interest rates for standard citizens. Senior citizens typically get an additional 0.50% interest rate. Check with the respective bank branches for updated yields before depositing.
+          </p>
         </div>
+      </div>
 
-        {/* Right columns: Sidebar Info content (4 columns) */}
-        <div className="lg:col-span-4 space-y-6">
-          {/* Reference Rate Table (static clearly marked as approximate) */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-            <h3 className="text-base font-semibold text-primary flex items-center gap-1.5">
-              <Table className="w-5 h-5 text-accent" /> Indicative Bank FD Rates (2025-26)
-            </h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs divide-y divide-gray-100">
-                <thead>
-                  <tr className="text-text-muted font-bold">
-                    <th className="pb-2">Bank</th>
-                    <th className="pb-2 text-right">1 Yr</th>
-                    <th className="pb-2 text-right">3 Yrs</th>
-                    <th className="pb-2 text-right">5 Yrs</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-150 font-sans">
-                  <tr>
-                    <td className="py-2.5 text-text font-medium">SBI</td>
-                    <td className="py-2.5 text-right font-medium">6.80%</td>
-                    <td className="py-2.5 text-right font-medium">6.75%</td>
-                    <td className="py-2.5 text-right font-medium">6.50%</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2.5 text-text font-medium">HDFC Bank</td>
-                    <td className="py-2.5 text-right font-medium">7.10%</td>
-                    <td className="py-2.5 text-right font-medium">7.00%</td>
-                    <td className="py-2.5 text-right font-medium">7.00%</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2.5 text-text font-medium">ICICI Bank</td>
-                    <td className="py-2.5 text-right font-medium">7.10%</td>
-                    <td className="py-2.5 text-right font-medium">7.00%</td>
-                    <td className="py-2.5 text-right font-medium">6.90%</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2.5 text-text font-medium">Axis Bank</td>
-                    <td className="py-2.5 text-right font-medium">7.20%</td>
-                    <td className="py-2.5 text-right font-medium">7.10%</td>
-                    <td className="py-2.5 text-right font-medium">7.00%</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2.5 text-text font-medium">Kotak Bank</td>
-                    <td className="py-2.5 text-right font-medium">7.15%</td>
-                    <td className="py-2.5 text-right font-medium">7.00%</td>
-                    <td className="py-2.5 text-right font-medium">6.80%</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p className="text-[10px] text-text-muted italic leading-relaxed">
-              * Indicative standard citizen rates. Senior citizens optionally secure a 0.50% bonus additions. Always verify benchmarks prior to deposit creation.
+      {/* 4. FAQ Section */}
+      <div className="bg-white rounded-xl border border-border p-6 md:p-8 space-y-6">
+        <h2 className="text-lg font-semibold text-primary border-b border-border pb-3">
+          Frequently Asked Questions
+        </h2>
+
+        <div className="space-y-6 text-xs sm:text-sm">
+          <div className="space-y-1">
+            <h3 className="font-semibold text-primary">What is the compounding frequency of a standard Fixed Deposit in India?</h3>
+            <p className="text-text-muted leading-relaxed">
+              In India, standard bank Fixed Deposits compounding frequency is quarterly (4 times a year). This means the interest is calculated and added to the principal balance every three months.
             </p>
           </div>
 
-          <AdSenseHolder label="Sidebar advertisement block" />
-
-          {/* FD vs RD Info Box */}
-          <div className="bg-primary text-white rounded-2xl p-6 md:p-8 space-y-4">
-            <h3 className="text-xl font-semibold tracking-tight">FD vs RD: Which is better?</h3>
-            <p className="text-sm text-gray-200 leading-relaxed font-sans">
-              While both vehicles offer government-regulated risk-free gains, they suit distinct income flows:
+          <div className="space-y-1">
+            <h3 className="font-semibold text-primary">How do Senior Citizen FD rates differ?</h3>
+            <p className="text-text-muted leading-relaxed">
+              Most commercial and public sector banks in India offer senior citizens (individuals aged 60 and above) a premium of 0.50% over standard citizen rates on their Fixed Deposits.
             </p>
-            <div className="text-xs text-gray-300 space-y-3 font-sans">
-              <p>• <strong>Fixed Deposits (FD):</strong> Best when you hold idle surplus capital (windfalls, bonuses) that can lock in to earn compounding returns instantly.</p>
-              <p>• <strong>Recurring Deposits (RD):</strong> Ideal to commit a portion of your regular monthly salary. Each installment gains interest as you continue to deposit.</p>
-            </div>
+          </div>
+
+          <div className="space-y-1">
+            <h3 className="font-semibold text-primary">Is interest earned on FD and RD taxable?</h3>
+            <p className="text-text-muted leading-relaxed">
+              Yes, interest earned from FDs and RDs is fully taxable under the head "Income from Other Sources". Banks also deduct TDS (Tax Deducted at Source) at 10% if your annual interest income across branches exceeds ₹40,000 (₹50,000 for senior citizens).
+            </p>
+          </div>
+
+          <div className="space-y-1">
+            <h3 className="font-semibold text-primary">Can I withdraw my money from an FD or RD early?</h3>
+            <p className="text-text-muted leading-relaxed">
+              Yes, premature withdrawal is permitted, but banks usually levy a premature withdrawal penalty, which is typically a reduction of 0.5% to 1% in the applicable interest rate for the duration the deposit was held.
+            </p>
           </div>
         </div>
       </div>
     </div>
   );
 }
+

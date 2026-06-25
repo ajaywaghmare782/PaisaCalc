@@ -14,57 +14,46 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     </noscript>
     <meta name="google-site-verification" content="zF8WakUE2UN90o41B8rduEkSB19H45ke4eQOH1vLVdw" />
   </head>
   <body>
     <div id="root"><!-- Static Shell for Instant FCP & LCP Rendering -->
-      <header class="sticky top-0 z-50 bg-white border-b border-gray-150 backdrop-blur-md bg-white/95">
+      <header class="sticky top-0 z-50 bg-white border-b border-slate-200">
         <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between font-sans relative">
           <div class="text-xl font-bold tracking-tight inline-flex items-center gap-1">
-            <span class="text-accent font-extrabold text-2xl">₹</span>
-            <span class="text-primary font-serif-heading font-semibold">Paisa</span>
-            <span class="text-text-muted font-normal">Calc</span>
+            <span class="text-slate-900 font-semibold">Paisa</span>
+            <span class="text-slate-500 font-normal">Calc</span>
           </div>
           <div class="hidden md:flex items-center gap-6">
-            <span class="text-sm font-semibold text-accent">Home</span>
-            <span class="text-sm font-semibold text-primary">Calculators</span>
-            <span class="text-sm font-semibold text-primary">Blog</span>
-            <span class="text-sm font-semibold text-primary">About</span>
+            <span class="text-sm font-semibold text-teal-700">Home</span>
+            <span class="text-sm font-semibold text-slate-900">Calculators</span>
+            <span class="text-sm font-semibold text-slate-900">Blog</span>
+            <span class="text-sm font-semibold text-slate-900">About</span>
           </div>
           <div class="hidden md:block">
-            <div class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl">All Calculators</div>
+            <!-- No heavy CTA button to reduce clutter -->
           </div>
         </nav>
       </header>
       <main class="flex-grow">
         <div class="space-y-12 animate-pageEnter">
-          <section class="bg-primary text-white py-16 md:py-24 relative overflow-hidden">
-            <!-- Rupee watermark SVG pattern background (excludes from LCP calculation and positioned statically to prevent CLS) -->
-            <svg class="absolute top-16 left-1/2 -translate-x-1/2 w-80 h-80 opacity-[0.04] pointer-events-none select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 3h12" />
-              <path d="M6 8h12" />
-              <path d="m6 13 8.5 8" />
-              <path d="M6 13h3a4 4 0 0 0 0-8" />
-            </svg>
-            <div class="max-w-6xl mx-auto px-4 relative z-10 text-center space-y-6">
-              <span class="inline-block bg-accent text-primary px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase font-sans">
-                100% Free • No Signups • Safe & Secure
-              </span>
-              <h1 class="text-4xl md:text-6xl font-semibold tracking-tight font-serif-heading max-w-4xl mx-auto leading-tight md:leading-none">
+          <section class="bg-slate-50 border-b border-slate-200 py-16 md:py-24 relative overflow-hidden">
+            <div class="max-w-4xl mx-auto px-4 relative z-10 text-center space-y-6">
+              <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 max-w-3xl mx-auto leading-tight">
                 Calculate Your Financial Future — Plan Smarter, Save Better
               </h1>
-              <p class="text-gray-200 text-base md:text-xl max-w-2xl mx-auto font-sans leading-relaxed">
+              <p class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-sans leading-relaxed">
                 From housing loan EMIs to SIP returns to side-by-side Income Tax brackets — all premium Indian financial calculators in one unified suite.
               </p>
               <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
-                <div class="w-48 py-3.5 bg-accent text-primary rounded-xl font-bold text-sm shadow-lg shadow-accent/20 text-center justify-center">
+                <div class="w-48 py-3 bg-teal-700 text-white rounded-lg font-semibold text-sm text-center justify-center border border-teal-700 cursor-pointer">
                   Explore Calculators
                 </div>
-                <div class="w-48 py-3.5 bg-white/10 text-white rounded-xl font-bold text-sm border border-white/10 text-center justify-center">
+                <div class="w-48 py-3 bg-white text-slate-700 rounded-lg font-semibold text-sm border border-slate-200 text-center justify-center cursor-pointer">
                   Read Financial Blog
                 </div>
               </div>
@@ -76,4 +65,5 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
 

@@ -29,7 +29,7 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-150 backdrop-blur-md bg-white/95">
+    <header className="sticky top-0 z-50 bg-white border-b border-border">
       <nav className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between font-sans relative">
         
         {/* LOGO */}
@@ -37,16 +37,15 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
           onClick={() => handleNavClick(ActiveView.HOME)}
           className="text-xl font-bold tracking-tight inline-flex items-center gap-1 cursor-pointer select-none"
         >
-          <span className="text-accent font-extrabold text-2xl">₹</span>
-          <span className="text-primary font-serif-heading font-semibold">Paisa</span>
+          <span className="text-primary font-semibold">Paisa</span>
           <span className="text-text-muted font-normal">Calc</span>
         </button>
 
         {/* DESKTOP LINKS */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           <button
             onClick={() => handleNavClick(ActiveView.HOME)}
-            className={`text-sm font-semibold transition cursor-pointer hover:text-accent ${currentView === ActiveView.HOME ? 'text-accent' : 'text-primary'}`}
+            className={`text-sm font-medium transition cursor-pointer hover:text-accent ${currentView === ActiveView.HOME ? 'text-accent font-semibold' : 'text-primary'}`}
           >
             Home
           </button>
@@ -56,7 +55,7 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
             <button
               onClick={() => setCalcDropdownOpen(!calcDropdownOpen)}
               onMouseEnter={() => setCalcDropdownOpen(true)}
-              className="text-sm font-semibold text-primary hover:text-accent inline-flex items-center gap-1 cursor-pointer py-2"
+              className="text-sm font-medium text-primary hover:text-accent inline-flex items-center gap-1 cursor-pointer py-2"
             >
               Calculators <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${calcDropdownOpen ? 'rotate-185' : 'rotate-0'}`} />
             </button>
@@ -64,13 +63,13 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
             {calcDropdownOpen && (
               <div
                 onMouseLeave={() => setCalcDropdownOpen(false)}
-                className="absolute left-0 mt-1 w-56 bg-white border border-gray-200 rounded-xl shadow-lg p-2 space-y-1 animate-fadeIn"
+                className="absolute left-0 mt-1 w-56 bg-white border border-border rounded-lg shadow-sm p-2 space-y-1 animate-fadeIn"
               >
                 {CALCULATORS_LIST.map((calc) => (
                   <button
                     key={calc.view}
                     onClick={() => handleNavClick(calc.view)}
-                    className={`w-full text-left px-3 py-2 text-xs font-semibold rounded-lg hover:bg-gray-50 hover:text-accent transition ${currentView === calc.view ? 'bg-primary/5 text-accent' : 'text-primary'}`}
+                    className={`w-full text-left px-3 py-2 text-xs font-medium rounded-md hover:bg-gray-50 hover:text-accent transition ${currentView === calc.view ? 'bg-gray-50 text-accent font-semibold' : 'text-primary'}`}
                   >
                     {calc.label}
                   </button>
@@ -81,39 +80,21 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
 
           <button
             onClick={() => handleNavClick(ActiveView.BLOG_LISTING)}
-            className={`text-sm font-semibold transition cursor-pointer hover:text-accent ${currentView === ActiveView.BLOG_LISTING || currentView === ActiveView.BLOG_POST ? 'text-accent' : 'text-primary'}`}
+            className={`text-sm font-medium transition cursor-pointer hover:text-accent ${currentView === ActiveView.BLOG_LISTING || currentView === ActiveView.BLOG_POST ? 'text-accent font-semibold' : 'text-primary'}`}
           >
             Blog
           </button>
 
           <button
             onClick={() => handleNavClick(ActiveView.ABOUT)}
-            className={`text-sm font-semibold transition cursor-pointer hover:text-accent ${currentView === ActiveView.ABOUT ? 'text-accent' : 'text-primary'}`}
+            className={`text-sm font-medium transition cursor-pointer hover:text-accent ${currentView === ActiveView.ABOUT ? 'text-accent font-semibold' : 'text-primary'}`}
           >
             About
           </button>
         </div>
 
-        {/* Expand List Button */}
-        <div className="hidden md:block">
-          <button
-            onClick={() => {
-              const el = document.getElementById('calculators-grid');
-              if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-              } else {
-                handleNavClick(ActiveView.HOME);
-                // Simple delayed scroll if navigating from other screens
-                setTimeout(() => {
-                  document.getElementById('calculators-grid')?.scrollIntoView({ behavior: 'smooth' });
-                }, 150);
-              }
-            }}
-            className="px-4 py-2 bg-primary hover:bg-primary/95 text-white text-xs font-bold rounded-xl transition cursor-pointer shadow-sm"
-          >
-            All Calculators
-          </button>
-        </div>
+        {/* Removed CTA button to keep design clean */}
+        <div className="hidden md:block w-1"></div>
 
         {/* MOBILE HAMBURGER BUTTON */}
         <button
@@ -127,17 +108,17 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
 
       {/* MOBILE DRAWER LAYOUT */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-150 absolute w-full left-0 p-4 space-y-4 shadow-xl animate-fadeIn z-40">
+        <div className="md:hidden bg-white border-t border-border absolute w-full left-0 p-4 space-y-4 shadow-sm animate-fadeIn z-40">
           <div className="flex flex-col gap-3.5">
             <button
               onClick={() => handleNavClick(ActiveView.HOME)}
-              className="text-left font-bold text-primary hover:text-accent text-sm"
+              className="text-left font-semibold text-primary hover:text-accent text-sm"
             >
               Home
             </button>
 
             {/* Calculators collapsible panel */}
-            <div className="space-y-2 border-t border-gray-100 pt-2.5">
+            <div className="space-y-2 border-t border-border pt-2.5">
               <span className="text-[10px] text-text-muted uppercase font-bold tracking-wider">All Calculators:</span>
               <div className="grid grid-cols-2 gap-2 pl-2">
                 {CALCULATORS_LIST.map((calc) => (
@@ -154,16 +135,16 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
 
             <button
               onClick={() => handleNavClick(ActiveView.BLOG_LISTING)}
-              className="text-left font-bold text-primary hover:text-accent text-sm border-t border-gray-100 pt-2.5"
+              className="text-left font-semibold text-primary hover:text-accent text-sm border-t border-border pt-2.5"
             >
-              Blog Posts File
+              Blog
             </button>
 
             <button
               onClick={() => handleNavClick(ActiveView.ABOUT)}
-              className="text-left font-bold text-primary hover:text-accent text-sm border-t border-gray-100 pt-2.5"
+              className="text-left font-semibold text-primary hover:text-accent text-sm border-t border-border pt-2.5"
             >
-              About & Contact
+              About
             </button>
           </div>
         </div>
@@ -171,3 +152,4 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
     </header>
   );
 }
+
