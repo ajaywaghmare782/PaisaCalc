@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ActiveView } from '../types';
-import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Wallet } from 'lucide-react';
 
 interface NavbarProps {
   currentView: ActiveView;
@@ -37,10 +37,15 @@ export default function Navbar({ currentView, onNavigate, darkMode, onToggleDark
         {/* LOGO */}
         <button
           onClick={() => handleNavClick(ActiveView.HOME)}
-          className="text-xl font-bold tracking-tight inline-flex items-center gap-1 cursor-pointer select-none"
+          className="text-xl font-bold tracking-tight inline-flex items-center gap-2 cursor-pointer select-none group"
         >
-          <span className="text-primary font-semibold">Paisa</span>
-          <span className="text-text-muted font-normal">Calc</span>
+          <div className="w-8 h-8 rounded-lg bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent transition-transform duration-200 group-hover:scale-105">
+            <Wallet className="w-4.5 h-4.5" />
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="text-primary font-semibold">Paisa</span>
+            <span className="text-text-muted font-normal">Calc</span>
+          </div>
         </button>
 
         {/* DESKTOP LINKS */}

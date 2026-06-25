@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActiveView } from '../types';
+import { Wallet } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (view: ActiveView) => void;
@@ -39,10 +40,15 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div className="space-y-4">
           <button
             onClick={() => handleNavClick(ActiveView.HOME)}
-            className="text-xl font-bold text-primary tracking-tight flex items-center gap-1 cursor-pointer"
+            className="text-xl font-bold text-primary tracking-tight flex items-center gap-2 cursor-pointer group"
           >
-            <span className="font-semibold">Paisa</span>
-            <span className="text-text-muted font-normal">Calc</span>
+            <div className="w-8 h-8 rounded-lg bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent transition-transform duration-200 group-hover:scale-105">
+              <Wallet className="w-4.5 h-4.5" />
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="font-semibold">Paisa</span>
+              <span className="text-text-muted font-normal">Calc</span>
+            </div>
           </button>
           <p className="text-xs text-text-muted leading-relaxed">
             India's Free Financial Calculator Suite — Plan smarter, accumulate wealth, compare income tax regimes, and evaluate loans with absolute local privacy.
