@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
-import { Mail, ShieldCheck, MapPin, Send } from 'lucide-react';
+import React from 'react';
+import { ShieldCheck, MapPin } from 'lucide-react';
 
 export default function About() {
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In Netlify, the static HTML handling process intercepts form submits automatically.
-    // In our live development preview, we'll show a friendly submission success toast/banner.
-    setFormSubmitted(true);
-  };
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 space-y-12">
@@ -49,75 +41,6 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Contact Form Section */}
-      <section className="bg-white rounded-2xl shadow-sm border border-gray-150 p-6 md:p-10">
-        <h2 className="text-2xl font-semibold text-primary font-serif-heading mb-4">
-          Get in Touch with PaisaCalc
-        </h2>
-        <p className="text-xs text-text-muted max-w-xl mb-6 font-sans">
-          Have suggestions for a new calculator? Have feedback or bug corrections? Drop us a line below. Our financial developers check messages daily.
-        </p>
-
-        {formSubmitted ? (
-          <div className="p-4 bg-success/5 border border-success/15 text-success rounded-xl text-center font-sans text-sm font-semibold">
-            Thank you for reaching out! Your message was submitted successfully. We will contact you at your email soon.
-          </div>
-        ) : (
-          <form 
-            name="contact" 
-            method="POST" 
-            data-netlify="true" 
-            onSubmit={handleSubmit}
-            className="space-y-4 font-sans text-sm"
-          >
-            {/* Netlify hidden field required for static HTML form processing */}
-            <input type="hidden" name="form-name" value="contact" />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-semibold text-text-muted uppercase mb-1">Your Full Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Enter your name"
-                  className="w-full bg-gray-50 border border-gray-200 focus:border-accent p-2.5 rounded-xl outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-text-muted uppercase mb-1">Your Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="name@gmail.com"
-                  className="w-full bg-gray-50 border border-gray-200 focus:border-accent p-2.5 rounded-xl outline-none"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-text-muted uppercase mb-1">Your Message</label>
-              <textarea
-                name="message"
-                required
-                rows={5}
-                placeholder="Write your suggestions or questions here..."
-                className="w-full bg-gray-50 border border-gray-200 focus:border-accent p-2.5 rounded-xl outline-none resize-none"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold flex items-center gap-2 transition cursor-pointer"
-            >
-              Send Secure Message <Send className="w-4 h-4" />
-            </button>
-          </form>
-        )}
       </section>
 
       {/* Social / SEBI / General Compliance Disclaimer */}

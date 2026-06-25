@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-serif: "DM Sans", system-ui, -apple-system, sans-serif;
   --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
   
-  --color-primary: #0F172A; /* Slate-900: Deep slate / navy */
-  --color-secondary: #475569; /* Slate-600: Neutral gray */
-  --color-accent: #0F766E; /* Teal-700: Muted green accent */
-  --color-bg: #F8FAFC; /* Slate-50: Near-white */
-  --color-surface: #FFFFFF;
-  --color-text: #0F172A;
-  --color-text-muted: #475569;
-  --color-border: #E2E8F0; /* Slate-200: Elegant subtle borders */
-  --color-success: #15803D; /* Muted Green */
-  --color-warning: #B45309; /* Muted Amber */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
 
   --animate-fadeIn: fadeIn 0.15s ease-out forwards;
   --animate-pageEnter: pageEnter 0.2s ease-out forwards;
@@ -39,12 +41,39 @@
   }
 }
 
+:root {
+  --primary: #0F172A; /* Slate-900: Deep slate / navy */
+  --secondary: #475569; /* Slate-600: Neutral gray */
+  --accent: #0F766E; /* Teal-700: Muted green accent */
+  --bg: #F8FAFC; /* Slate-50: Near-white */
+  --surface: #FFFFFF;
+  --text: #0F172A;
+  --text-muted: #475569;
+  --border: #E2E8F0; /* Slate-200: Elegant subtle borders */
+  --success: #15803D; /* Muted Green */
+  --warning: #B45309; /* Muted Amber */
+}
+
+.dark {
+  --primary: #F8FAFC; /* Slate-50: Off-white */
+  --secondary: #94A3B8; /* Slate-400: Light neutral gray */
+  --accent: #2DD4BF; /* Teal-400: Vibrant teal accent */
+  --bg: #0F172A; /* Slate-900: Dark slate */
+  --surface: #1E293B; /* Slate-800: Card/Navbar backgrounds */
+  --text: #F8FAFC;
+  --text-muted: #94A3B8;
+  --border: #334155; /* Slate-700: Muted dark borders */
+  --success: #4ADE80; /* Green-400 */
+  --warning: #FBBF24; /* Amber-400 */
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text);
   font-size: 1rem;
   line-height: 1.625;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 h1, h2, h3, .font-serif-heading {
@@ -63,3 +92,78 @@ html {
   border: 1px dashed var(--color-border);
 }
 
+/* Dark Mode Overrides for Tailwind classes */
+.dark .bg-white {
+  background-color: var(--surface) !important;
+}
+
+.dark .bg-slate-50, .dark .bg-gray-50 {
+  background-color: var(--bg) !important;
+}
+
+.dark .bg-slate-100, .dark .bg-gray-100 {
+  background-color: #334155 !important;
+}
+
+.dark .bg-slate-200\/60 {
+  background-color: rgba(51, 65, 85, 0.6) !important;
+}
+
+.dark .border-gray-100, .dark .border-gray-150, .dark .border-gray-200 {
+  border-color: var(--border) !important;
+}
+
+.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border) !important;
+}
+
+.dark .divide-border > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border) !important;
+}
+
+.dark .text-slate-900, .dark .text-gray-900 {
+  color: var(--primary) !important;
+}
+
+.dark .text-slate-600, .dark .text-gray-600, .dark .text-slate-500, .dark .text-gray-500 {
+  color: var(--secondary) !important;
+}
+
+.dark .text-yellow-800, .dark .text-yellow-905 {
+  color: #FBBF24 !important;
+}
+
+.dark .bg-yellow-50 {
+  background-color: rgba(180, 83, 9, 0.15) !important;
+  border-color: rgba(251, 191, 36, 0.3) !important;
+}
+
+.dark .hover\:bg-gray-50:hover, .dark .hover\:bg-slate-50:hover {
+  background-color: #334155 !important;
+}
+
+.dark .hover\:bg-slate-50\/30:hover {
+  background-color: rgba(51, 65, 85, 0.3) !important;
+}
+
+.dark .hover\:bg-slate-50\/50:hover {
+  background-color: rgba(51, 65, 85, 0.5) !important;
+}
+
+.dark .text-teal-700, .dark .text-teal-800 {
+  color: var(--accent) !important;
+}
+
+.dark input[type="range"] {
+  background-color: #334155;
+}
+
+.dark input, .dark select, .dark textarea {
+  background-color: var(--bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.dark input:focus, .dark select:focus, .dark textarea:focus {
+  border-color: var(--accent);
+}

@@ -15,6 +15,7 @@ export default function Footer({ onNavigate }: FooterProps) {
     { view: ActiveView.HOME, label: "Home" },
     { view: ActiveView.BLOG_LISTING, label: "Blog" },
     { view: ActiveView.ABOUT, label: "About" },
+    { view: ActiveView.CONTACT, label: "Contact Us" },
     { view: ActiveView.PRIVACY, label: "Privacy Policy" },
     { view: ActiveView.DISCLAIMER, label: "Disclaimer" }
   ];

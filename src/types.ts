@@ -12,7 +12,8 @@ export enum ActiveView {
   BLOG_POST = 'BLOG_POST',
   ABOUT = 'ABOUT',
   PRIVACY = 'PRIVACY',
-  DISCLAIMER = 'DISCLAIMER'
+  DISCLAIMER = 'DISCLAIMER',
+  CONTACT = 'CONTACT'
 }
 
 export type ParagraphBlockType = 

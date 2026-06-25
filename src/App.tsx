@@ -16,6 +16,7 @@ import Home from './components/pages/Home';
 
 // Lazy loaded page views
 const About = lazy(() => import('./components/pages/About'));
+const Contact = lazy(() => import('./components/pages/Contact'));
 const PrivacyPolicy = lazy(() => import('./components/pages/PrivacyPolicy'));
 const Disclaimer = lazy(() => import('./components/pages/Disclaimer'));
 
@@ -58,6 +59,8 @@ const viewToPath = (view: ActiveView, slug?: string): string => {
       return `/blog/${slug || ''}`;
     case ActiveView.ABOUT:
       return '/about';
+    case ActiveView.CONTACT:
+      return '/contact';
     case ActiveView.PRIVACY:
       return '/privacy-policy';
     case ActiveView.DISCLAIMER:
@@ -105,6 +108,9 @@ const pathToView = (path: string): { view: ActiveView; slug: string } => {
   }
   if (cleanPath === '/about') {
     return { view: ActiveView.ABOUT, slug: '' };
+  }
+  if (cleanPath === '/contact') {
+    return { view: ActiveView.CONTACT, slug: '' };
   }
   if (cleanPath === '/privacy-policy') {
     return { view: ActiveView.PRIVACY, slug: '' };
@@ -181,8 +187,13 @@ const getPageMetadata = (view: ActiveView, selectedPostSlug?: string): PageMetad
     }
     case ActiveView.ABOUT:
       return {
-        title: "About Us & Contact — PaisaCalc",
-        description: "Learn about PaisaCalc, our mission to simplify personal finance math for Indian taxpayers, and get in touch."
+        title: "About Us — PaisaCalc",
+        description: "Learn about PaisaCalc and our mission to simplify personal finance calculations for Indian taxpayers."
+      };
+    case ActiveView.CONTACT:
+      return {
+        title: "Contact Us — PaisaCalc",
+        description: "Have feedback or suggestions for new calculators? Get in touch with our team of financial developers."
       };
     case ActiveView.PRIVACY:
       return {
@@ -205,6 +216,31 @@ const getPageMetadata = (view: ActiveView, selectedPostSlug?: string): PageMetad
 export default function App() {
   const [currentView, setCurrentView] = useState<ActiveView>(ActiveView.HOME);
   const [selectedPostSlug, setSelectedPostSlug] = useState<string>('');
+  
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('darkMode');
+      if (saved !== null) {
+        return saved === 'true';
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (darkMode) {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', darkMode.toString());
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(prev => !prev);
+  };
 
   // 1. Initial URL synchronization & browser history popstate handling
   useEffect(() => {
@@ -357,6 +393,8 @@ export default function App() {
         );
       case ActiveView.ABOUT:
         return <About />;
+      case ActiveView.CONTACT:
+        return <Contact />;
       case ActiveView.PRIVACY:
         return <PrivacyPolicy />;
       case ActiveView.DISCLAIMER:
@@ -401,7 +439,12 @@ export default function App() {
   return (
     <div className="flex flex-col min-h-screen font-sans bg-bg text-text">
       {/* Global Navigation Header */}
-      <Navbar currentView={currentView} onNavigate={handleNavigateView} />
+      <Navbar 
+        currentView={currentView} 
+        onNavigate={handleNavigateView} 
+        darkMode={darkMode}
+        onToggleDarkMode={toggleDarkMode}
+      />
 
       {/* Main Container with smooth entry and route transition animations */}
       <main className="flex-grow">

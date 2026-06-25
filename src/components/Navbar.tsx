@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { ActiveView } from '../types';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 
 interface NavbarProps {
   currentView: ActiveView;
   onNavigate: (view: ActiveView) => void;
+  darkMode: boolean;
+  onToggleDarkMode: () => void;
 }
 
-export default function Navbar({ currentView, onNavigate }: NavbarProps) {
+export default function Navbar({ currentView, onNavigate, darkMode, onToggleDarkMode }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [calcDropdownOpen, setCalcDropdownOpen] = useState<boolean>(false);
 
@@ -91,19 +93,47 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
           >
             About
           </button>
+
+          <button
+            onClick={() => handleNavClick(ActiveView.CONTACT)}
+            className={`text-sm font-medium transition cursor-pointer hover:text-accent ${currentView === ActiveView.CONTACT ? 'text-accent font-semibold' : 'text-primary'}`}
+          >
+            Contact
+          </button>
+
+          {/* Theme toggler */}
+          <button
+            onClick={onToggleDarkMode}
+            className="p-2 text-primary hover:text-accent hover:bg-gray-100 rounded-lg transition cursor-pointer dark:hover:bg-slate-800"
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4" />}
+          </button>
         </div>
 
-        {/* Removed CTA button to keep design clean */}
+        {/* Space adjustment */}
         <div className="hidden md:block w-1"></div>
 
-        {/* MOBILE HAMBURGER BUTTON */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-primary hover:text-accent focus:outline-none cursor-pointer"
-          aria-label="Toggle Navigation Menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* MOBILE CONTROLS */}
+        <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Theme toggler */}
+          <button
+            onClick={onToggleDarkMode}
+            className="p-2 text-primary hover:text-accent hover:bg-gray-100 rounded-lg transition cursor-pointer dark:hover:bg-slate-800"
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? <Sun className="w-4.5 h-4.5 text-amber-500" /> : <Moon className="w-4.5 h-4.5" />}
+          </button>
+
+          {/* MOBILE HAMBURGER BUTTON */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-primary hover:text-accent focus:outline-none cursor-pointer"
+            aria-label="Toggle Navigation Menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* MOBILE DRAWER LAYOUT */}
@@ -145,6 +175,13 @@ export default function Navbar({ currentView, onNavigate }: NavbarProps) {
               className="text-left font-semibold text-primary hover:text-accent text-sm border-t border-border pt-2.5"
             >
               About
+            </button>
+
+            <button
+              onClick={() => handleNavClick(ActiveView.CONTACT)}
+              className="text-left font-semibold text-primary hover:text-accent text-sm border-t border-border pt-2.5"
+            >
+              Contact
             </button>
           </div>
         </div>
